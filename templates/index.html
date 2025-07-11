@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Status Predictor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+        <h1 class="text-2xl font-bold mb-6 text-center">Loan Status Predictor</h1>
+        <form action="/" method="post" class="space-y-4">
+            <div>
+                <label for="Gender" class="block text-sm font-medium text-gray-700">Gender</label>
+                <select id="Gender" name="Gender" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                    <option value="Male" {% if form_data.Gender == 'Male' %}selected{% endif %}>Male</option>
+                    <option value="Female" {% if form_data.Gender == 'Female' %}selected{% endif %}>Female</option>
+                </select>
+            </div>
+            <div>
+                <label for="Married" class="block text-sm font-medium text-gray-700">Married</label>
+                <select id="Married" name="Married" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                    <option value="No" {% if form_data.Married == 'No' %}selected{% endif %}>No</option>
+                    <option value="Yes" {% if form_data.Married == 'Yes' %}selected{% endif %}>Yes</option>
+                </select>
+            </div>
+            <div>
+                <label for="Dependents" class="block text-sm font-medium text-gray-700">Dependents</label>
+                <select id="Dependents" name="Dependents" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                    <option value="0" {% if form_data.Dependents == '0' %}selected{% endif %}>0</option>
+                    <option value="1" {% if form_data.Dependents == '1' %}selected{% endif %}>1</option>
+                    <option value="2" {% if form_data.Dependents == '2' %}selected{% endif %}>2</option>
+                    <option value="3+" {% if form_data.Dependents == '3+' %}selected{% endif %}>3+</option>
+                </select>
+            </div>
+            <div>
+                <label for="Education" class="block text-sm font-medium text-gray-700">Education</label>
+                <select id="Education" name="Education" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                    <option value="Graduate" {% if form_data.Education == 'Graduate' %}selected{% endif %}>Graduate</option>
+                    <option value="Not Graduate" {% if form_data.Education == 'Not Graduate' %}selected{% endif %}>Not Graduate</option>
+                </select>
+            </div>
+            <div>
+                <label for="Self_Employed" class="block text-sm font-medium text-gray-700">Self Employed</label>
+                <select id="Self_Employed" name="Self_Employed" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                    <option value="No" {% if form_data.Self_Employed == 'No' %}selected{% endif %}>No</option>
+                    <option value="Yes" {% if form_data.Self_Employed == 'Yes' %}selected{% endif %}>Yes</option>
+                </select>
+            </div>
+            <div>
+                <label for="ApplicantIncome" class="block text-sm font-medium text-gray-700">Applicant Income</label>
+                <input type="number" id="ApplicantIncome" name="ApplicantIncome" value="{{ form_data.ApplicantIncome }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" placeholder="e.g., 5000">
+            </div>
+            <div>
+                <label for="CoapplicantIncome" class="block text-sm font-medium text-gray-700">Coapplicant Income</label>
+                <input type="number" id="CoapplicantIncome" name="CoapplicantIncome" value="{{ form_data.CoapplicantIncome }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" placeholder="e.g., 2000">
+            </div>
+            <div>
+                <label for="LoanAmount" class="block text-sm font-medium text-gray-700">Loan Amount</label>
+                <input type="number" id="LoanAmount" name="LoanAmount" value="{{ form_data.LoanAmount }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" placeholder="e.g., 150">
+            </div>
+            <div>
+                <label for="Loan_Amount_Term" class="block text-sm font-medium text-gray-700">Loan Amount Term</label>
+                <input type="number" id="Loan_Amount_Term" name="Loan_Amount_Term" value="{{ form_data.Loan_Amount_Term }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" placeholder="e.g., 360">
+            </div>
+            <div>
+                <label for="Credit_History" class="block text-sm font-medium text-gray-700">Credit History</label>
+                <select id="Credit_History" name="Credit_History" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                    <option value="1" {% if form_data.Credit_History == '1' %}selected{% endif %}>1</option>
+                    <option value="0" {% if form_data.Credit_History == '0' %}selected{% endif %}>0</option>
+                </select>
+            </div>
+            <div>
+                <label for="Property_Area" class="block text-sm font-medium text-gray-700">Property Area</label>
+                <select id="Property_Area" name="Property_Area" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                    <option value="Urban" {% if form_data.Property_Area == 'Urban' %}selected{% endif %}>Urban</option>
+                    <option value="Semiurban" {% if form_data.Property_Area == 'Semiurban' %}selected{% endif %}>Semiurban</option>
+                    <option value="Rural" {% if form_data.Property_Area == 'Rural' %}selected{% endif %}>Rural</option>
+                </select>
+            </div>
+            <button type="submit" class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700">Predict Loan Status</button>
+        </form>
+        {% if prediction %}
+        <div class="mt-6">
+            <h2 class="text-lg font-semibold">Prediction Result:</h2>
+            <p class="bg-gray-100 p-4 rounded-md mt-2">{{ prediction }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
